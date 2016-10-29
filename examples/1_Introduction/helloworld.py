@@ -1,4 +1,7 @@
 '''
+opencl comments: ok, I (guess) we cant put a string constnat on the gpu.  Or maybe we can.  anyway, out of my scope
+for now :-)
+
 HelloWorld example using TensorFlow library.
 
 Author: Aymeric Damien

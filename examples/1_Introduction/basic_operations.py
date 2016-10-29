@@ -26,8 +26,8 @@ with tf.device('/gpu:0'):
     # The value returned by the constructor represents the output
     # of the Variable op. (define as input when running session)
     # tf Graph input
-    a = tf.placeholder(tf.int16)
-    b = tf.placeholder(tf.int16)
+    a = tf.placeholder(tf.int32)   # modifying to int32 for now - Hugh
+    b = tf.placeholder(tf.int32)
 
     # Define some operations
     add = tf.add(a, b)
