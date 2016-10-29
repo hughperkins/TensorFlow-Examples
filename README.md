@@ -14,4 +14,6 @@ See: https://github.com/aymericdamien/TensorFlow-Examples
 examples/
   1_Introduction/
     basic_operations.py  (nuance: changed `tf.int16` to `tf.int32`)
+  2_BasicModels/
+    linear_regression.py  runs ok now :-)  (needs wheel v0.10.0)
 ```
