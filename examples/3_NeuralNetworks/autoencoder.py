@@ -36,16 +36,16 @@ with tf.device('/gpu:0'):
     X = tf.placeholder("float", [None, n_input])
 
     weights = {
-        'encoder_h1': tf.Variable(tf.random_normal([n_input, n_hidden_1])),
-        'encoder_h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
-        'decoder_h1': tf.Variable(tf.random_normal([n_hidden_2, n_hidden_1])),
-        'decoder_h2': tf.Variable(tf.random_normal([n_hidden_1, n_input])),
+        'encoder_h1': tf.Variable(np.random.randn(n_input, n_hidden_1).astype(np.float32)),
+        'encoder_h2': tf.Variable(np.random.randn(n_hidden_1, n_hidden_2).astype(np.float32)),
+        'decoder_h1': tf.Variable(np.random.randn(n_hidden_2, n_hidden_1).astype(np.float32)),
+        'decoder_h2': tf.Variable(np.random.randn(n_hidden_1, n_input).astype(np.float32)),
     }
     biases = {
-        'encoder_b1': tf.Variable(tf.random_normal([n_hidden_1])),
-        'encoder_b2': tf.Variable(tf.random_normal([n_hidden_2])),
-        'decoder_b1': tf.Variable(tf.random_normal([n_hidden_1])),
-        'decoder_b2': tf.Variable(tf.random_normal([n_input])),
+        'encoder_b1': tf.Variable(np.random.randn(n_hidden_1).astype(np.float32)),
+        'encoder_b2': tf.Variable(np.random.randn(n_hidden_2).astype(np.float32)),
+        'decoder_b1': tf.Variable(np.random.randn(n_hidden_1).astype(np.float32)),
+        'decoder_b2': tf.Variable(np.random.randn(n_input).astype(np.float32)),
     }
 
 
