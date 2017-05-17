@@ -42,10 +42,12 @@ with tf.device('/gpu:0'):
 
     # Define weights
     weights = {
-        'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
+        # 'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
+        'out': tf.Variable(np.random.randn(n_hidden, n_classes).astype(np.float32))
     }
     biases = {
-        'out': tf.Variable(tf.random_normal([n_classes]))
+        # 'out': tf.Variable(tf.random_normal([n_classes]))
+        'out': tf.Variable(np.random.randn(n_classes).astype(np.float32))
     }
 
 
