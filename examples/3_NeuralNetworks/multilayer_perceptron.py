@@ -67,12 +67,8 @@ with tf.device('/gpu:0'):
     # Construct model
     pred = multilayer_perceptron(x, weights, biases)
 
-# Define loss and optimizer
-# int32 mean runs on cpu, even on CUDA
-loss_t = tf.nn.softmax_cross_entropy_with_logits(pred, y)
-
-with tf.device('/gpu:0'):
-    cost = tf.reduce_mean(loss_t)
+    # Define loss and optimizer
+    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(pred, y))
     optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
     # Initializing the variables
