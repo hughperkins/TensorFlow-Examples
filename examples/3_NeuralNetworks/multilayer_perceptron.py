@@ -14,7 +14,6 @@ from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
 import tensorflow as tf
-import numpy as np
 
 # Parameters
 learning_rate = 0.001
@@ -48,20 +47,14 @@ with tf.device('/gpu:0'):
 
     # Store layers weight & bias
     weights = {
-        # 'h1': tf.Variable(tf.random_normal([n_input, n_hidden_1])),
-        # 'h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
-        # 'out': tf.Variable(tf.random_normal([n_hidden_2, n_classes]))
-        'h1': tf.Variable(np.random.randn(n_input, n_hidden_1).astype(np.float32)),
-        'h2': tf.Variable(np.random.randn(n_hidden_1, n_hidden_2).astype(np.float32)),
-        'out': tf.Variable(np.random.randn(n_hidden_2, n_classes).astype(np.float32))
+        'h1': tf.Variable(tf.random_normal([n_input, n_hidden_1])),
+        'h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
+        'out': tf.Variable(tf.random_normal([n_hidden_2, n_classes]))
     }
     biases = {
-        # 'b1': tf.Variable(tf.random_normal([n_hidden_1])),
-        # 'b2': tf.Variable(tf.random_normal([n_hidden_2])),
-        # 'out': tf.Variable(tf.random_normal([n_classes]))
-        'b1': tf.Variable(np.random.randn(n_hidden_1).astype(np.float32)),
-        'b2': tf.Variable(np.random.randn(n_hidden_2).astype(np.float32)),
-        'out': tf.Variable(np.random.randn(n_classes).astype(np.float32))
+        'b1': tf.Variable(tf.random_normal([n_hidden_1])),
+        'b2': tf.Variable(tf.random_normal([n_hidden_2])),
+        'out': tf.Variable(tf.random_normal([n_classes]))
     }
 
     # Construct model

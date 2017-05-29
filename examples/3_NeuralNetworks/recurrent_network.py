@@ -11,7 +11,6 @@ from __future__ import print_function
 
 import tensorflow as tf
 from tensorflow.python.ops import rnn, rnn_cell
-import numpy as np
 
 # Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
@@ -42,12 +41,10 @@ with tf.device('/gpu:0'):
 
     # Define weights
     weights = {
-        # 'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
-        'out': tf.Variable(np.random.randn(n_hidden, n_classes).astype(np.float32))
+        'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
     }
     biases = {
-        # 'out': tf.Variable(tf.random_normal([n_classes]))
-        'out': tf.Variable(np.random.randn(n_classes).astype(np.float32))
+        'out': tf.Variable(tf.random_normal([n_classes]))
     }
 
 

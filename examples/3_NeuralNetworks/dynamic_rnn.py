@@ -12,7 +12,6 @@ Project: https://github.com/aymericdamien/TensorFlow-Examples/
 from __future__ import print_function
 
 import tensorflow as tf
-import numpy as np
 import random
 
 
@@ -103,12 +102,10 @@ with tf.device('/gpu:0'):
 
     # Define weights
     weights = {
-        # 'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
-        'out': tf.Variable(np.random.randn(n_hidden, n_classes).astype(np.float32))
+        'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
     }
     biases = {
-        # 'out': tf.Variable(tf.random_normal([n_classes]))
-        'out': tf.Variable(np.random.randn(n_classes).astype(np.float32))
+        'out': tf.Variable(tf.random_normal([n_classes]))
     }
 
 
