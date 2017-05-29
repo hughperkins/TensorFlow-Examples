@@ -68,7 +68,7 @@ with tf.device('/gpu:0'):
     init = tf.initialize_all_variables()
 
     # Launch the graph
-    with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:
+    with tf.Session(config=tf.ConfigProto(log_device_placement=False)) as sess:
         sess.run(init)
 
         # Training cycle
