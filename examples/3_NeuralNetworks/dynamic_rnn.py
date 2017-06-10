@@ -97,6 +97,8 @@ trainset = ToySequenceData(n_samples=1000, max_seq_len=seq_max_len)
 testset = ToySequenceData(n_samples=500, max_seq_len=seq_max_len)
 
 with tf.device('/gpu:0'):
+    tf.set_random_seed(123)
+
     # tf Graph input
     x = tf.placeholder("float", [None, seq_max_len, 1])
     y = tf.placeholder("float", [None, n_classes])
