@@ -20,6 +20,7 @@ learning_rate = 0.001
 training_epochs = 15
 batch_size = 100
 display_step = 1
+training_epochs = 2
 
 # Network Parameters
 n_hidden_1 = 256 # 1st layer number of features

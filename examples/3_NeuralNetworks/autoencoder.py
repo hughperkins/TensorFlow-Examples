@@ -12,7 +12,7 @@ Links:
 from __future__ import division, print_function, absolute_import
 
 import tensorflow as tf
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 # Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
@@ -24,6 +24,8 @@ training_epochs = 20
 batch_size = 256
 display_step = 1
 examples_to_show = 10
+
+training_epochs = 2
 
 # Network Parameters
 n_hidden_1 = 256 # 1st layer num features
@@ -107,10 +109,10 @@ with tf.device('/gpu:0'):
         encode_decode = sess.run(
             y_pred, feed_dict={X: mnist.test.images[:examples_to_show]})
         # Compare original images with their reconstructions
-        f, a = plt.subplots(2, 10, figsize=(10, 2))
-        for i in range(examples_to_show):
-            a[0][i].imshow(np.reshape(mnist.test.images[i], (28, 28)))
-            a[1][i].imshow(np.reshape(encode_decode[i], (28, 28)))
-        f.show()
-        plt.draw()
-        plt.waitforbuttonpress()
+        # f, a = plt.subplots(2, 10, figsize=(10, 2))
+        # for i in range(examples_to_show):
+        #     a[0][i].imshow(np.reshape(mnist.test.images[i], (28, 28)))
+        #     a[1][i].imshow(np.reshape(encode_decode[i], (28, 28)))
+        # f.show()
+        # plt.draw()
+        # plt.waitforbuttonpress()
