@@ -42,6 +42,8 @@ x = tf.placeholder("float", [None, n_steps, n_input])
 y = tf.placeholder("float", [None, n_classes])
 
 with tf.device('/gpu:0'):
+    tf.set_random_seed(123)
+
     # Define weights
     weights = {
         # Hidden layer weights => 2*n_hidden because of forward + backward cells

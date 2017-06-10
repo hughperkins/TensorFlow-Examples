@@ -35,6 +35,7 @@ n_input = 784 # MNIST data input (img shape: 28*28)
 
 with tf.device('/gpu:0'):
     # tf Graph input (only pictures)
+    tf.set_random_seed(123)
     X = tf.placeholder("float", [None, n_input])
 
     weights = {

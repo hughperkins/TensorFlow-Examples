@@ -38,6 +38,8 @@ n_hidden = 128 # hidden layer num of features
 n_classes = 10 # MNIST total classes (0-9 digits)
 
 with tf.device('/gpu:0'):
+    tf.set_random_seed(123)
+
     # tf Graph input
     x = tf.placeholder("float", [None, n_steps, n_input])
     y = tf.placeholder("float", [None, n_classes])
