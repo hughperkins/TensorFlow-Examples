@@ -5,6 +5,8 @@
 set -e
 set -x
 
+cd examples
+
 pushd 2_BasicModels
 python linear_regression.py
 python logistic_regression.py
