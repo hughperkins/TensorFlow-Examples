@@ -18,6 +18,7 @@ learning_rate = 0.01
 training_epochs = 1000
 training_epochs = 40
 display_step = 1
+numpy.random.seed(123)
 
 with tf.device('/gpu:0'):
     # Training Data
