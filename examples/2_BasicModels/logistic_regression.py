@@ -21,6 +21,8 @@ training_epochs = 25
 batch_size = 100
 display_step = 1
 
+training_epochs = 2
+
 with tf.device('/gpu:0'):
     # tf Graph Input
     x = tf.placeholder(tf.float32, [None, 784]) # mnist data image of shape 28*28=784
