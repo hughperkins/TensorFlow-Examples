@@ -12,6 +12,7 @@ Links:
 from __future__ import division, print_function, absolute_import
 
 import tensorflow as tf
+import math
 # import matplotlib.pyplot as plt
 
 # Import MNIST data
@@ -104,6 +105,7 @@ with tf.device('/gpu:0'):
                       "cost=", "{:.9f}".format(c))
 
         print("Optimization Finished!")
+        assert c <= 0.17 and c >= 0.1 and not math.isnan(c)
 
         # Applying encode and decode over test set
         encode_decode = sess.run(

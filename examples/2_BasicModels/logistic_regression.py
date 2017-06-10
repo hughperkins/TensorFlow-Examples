@@ -10,6 +10,7 @@ Project: https://github.com/aymericdamien/TensorFlow-Examples/
 from __future__ import print_function
 
 import tensorflow as tf
+import math
 
 # Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
@@ -69,4 +70,7 @@ with tf.device('/gpu:0'):
         correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
         # Calculate accuracy
         accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-        print("Accuracy:", accuracy.eval({x: mnist.test.images, y: mnist.test.labels}))
+        accuracy_eval = accuracy.eval({x: mnist.test.images, y: mnist.test.labels})
+        print("Accuracy:", accuracy_eval)
+        assert accuracy_eval >= 0.85 and not math.isnan(accuracy_eval)
+

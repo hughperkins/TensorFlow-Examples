@@ -13,6 +13,7 @@ from __future__ import print_function
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
+import math
 import tensorflow as tf
 
 # Parameters
@@ -94,4 +95,6 @@ with tf.device('/gpu:0'):
         correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
         # Calculate accuracy
         accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
-        print("Accuracy:", accuracy.eval({x: mnist.test.images, y: mnist.test.labels}))
+        accuracy_eval = accuracy.eval({x: mnist.test.images, y: mnist.test.labels})
+        print("Accuracy:", accuracy_eval)
+        assert accuracy_eval >= 0.85 and not math.isnan(accuracy_eval)

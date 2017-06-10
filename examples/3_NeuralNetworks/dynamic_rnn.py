@@ -12,6 +12,7 @@ Project: https://github.com/aymericdamien/TensorFlow-Examples/
 from __future__ import print_function
 
 import tensorflow as tf
+import math
 import random
 
 
@@ -194,6 +195,7 @@ with tf.device('/gpu:0'):
         test_data = testset.data
         test_label = testset.labels
         test_seqlen = testset.seqlen
-        print("Testing Accuracy:", \
-            sess.run(accuracy, feed_dict={x: test_data, y: test_label,
-                                          seqlen: test_seqlen}))
+        test_accuracy = sess.run(accuracy, feed_dict={x: test_data, y: test_label,
+                                          seqlen: test_seqlen})
+        print("Testing Accuracy:", test_accuracy)
+        assert test_accuracy >= 0.44 and not math.isnan(test_accuracy)

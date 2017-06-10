@@ -9,6 +9,7 @@ Project: https://github.com/aymericdamien/TensorFlow-Examples/
 
 from __future__ import print_function
 
+import math
 import tensorflow as tf
 from tensorflow.python.ops import rnn, rnn_cell
 
@@ -120,5 +121,6 @@ with tf.device('/gpu:0'):
         test_len = 128
         test_data = mnist.test.images[:test_len].reshape((-1, n_steps, n_input))
         test_label = mnist.test.labels[:test_len]
-        print("Testing Accuracy:", \
-            sess.run(accuracy, feed_dict={x: test_data, y: test_label}))
+        test_accuracy = sess.run(accuracy, feed_dict={x: test_data, y: test_label})
+        print("Testing Accuracy:", test_accuracy)
+        assert test_accuracy >= 0.30 and not math.isnan(test_accuracy)

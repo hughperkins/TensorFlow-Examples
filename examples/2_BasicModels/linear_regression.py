@@ -9,6 +9,7 @@ from __future__ import print_function
 
 import tensorflow as tf
 import numpy
+import math
 # import matplotlib.pyplot as plt
 rng = numpy.random
 
@@ -81,6 +82,7 @@ with tf.device('/gpu:0'):
         print("Testing cost=", testing_cost)
         print("Absolute mean square loss difference:", abs(
             training_cost - testing_cost))
+        assert testing_cost >= 0.07 and testing_cost <= 0.11 and not math.isnan(testing_cost)
 
         # plt.plot(test_X, test_Y, 'bo', label='Testing data')
         # plt.plot(train_X, sess.run(W) * train_X + sess.run(b), label='Fitted line')

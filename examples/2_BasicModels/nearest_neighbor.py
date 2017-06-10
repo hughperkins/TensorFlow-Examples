@@ -10,6 +10,7 @@ Project: https://github.com/aymericdamien/TensorFlow-Examples/
 from __future__ import print_function
 
 import numpy as np
+import math
 import tensorflow as tf
 
 # Import MNIST data
@@ -52,3 +53,4 @@ with tf.device('/gpu:0'):
                 accuracy += 1./len(Xte)
         print("Done!")
         print("Accuracy:", accuracy)
+        assert accuracy >= 0.9 and not math.isnan(accuracy)
