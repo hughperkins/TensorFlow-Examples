@@ -27,7 +27,7 @@ batch_size = 256
 display_step = 1
 examples_to_show = 10
 
-training_epochs = 2
+training_epochs = 3
 
 # Network Parameters
 n_hidden_1 = 256 # 1st layer num features
