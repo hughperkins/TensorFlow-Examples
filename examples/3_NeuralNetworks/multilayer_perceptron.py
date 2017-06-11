@@ -14,6 +14,8 @@ from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
 import math
+import time
+import numpy as np
 import tensorflow as tf
 
 # Parameters
@@ -75,8 +77,10 @@ with tf.device('/gpu:0'):
     with tf.Session(config=tf.ConfigProto(log_device_placement=False)) as sess:
         sess.run(init)
 
+        epoch_times = []
         # Training cycle
         for epoch in range(training_epochs):
+            start = time.time()
             avg_cost = 0.
             total_batch = int(mnist.train.num_examples/batch_size)
             # Loop over all batches
@@ -87,6 +91,10 @@ with tf.device('/gpu:0'):
                                                               y: batch_y})
                 # Compute average loss
                 avg_cost += c / total_batch
+
+            epoch_time = time.time() - start
+            epoch_times.append(epoch_time)
+
             # Display logs per epoch step
             if epoch % display_step == 0:
                 print("Epoch:", '%04d' % (epoch+1), "cost=", \
@@ -100,3 +108,8 @@ with tf.device('/gpu:0'):
         accuracy_eval = accuracy.eval({x: mnist.test.images, y: mnist.test.labels})
         print("Accuracy:", accuracy_eval)
         assert accuracy_eval >= 0.85 and not math.isnan(accuracy_eval)
+
+        print('epoch_times', epoch_times)
+        average_epoch_time = np.average(epoch_times[1:])
+        kernel_compile_time = epoch_times[0] - average_epoch_time
+        print('average_epoch_times=', average_epoch_time, 'kernel_compile_time', kernel_compile_time)

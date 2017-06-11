@@ -14,6 +14,8 @@ from __future__ import print_function
 import tensorflow as tf
 import math
 import random
+import numpy as np
+import time
 
 
 # ====================
@@ -174,8 +176,10 @@ with tf.device('/gpu:0'):
     with tf.Session() as sess:
         sess.run(init)
         step = 1
+        iter_times = []
         # Keep training until reach max iterations
         while step * batch_size < training_iters:
+            start = time.time()
             batch_x, batch_y, batch_seqlen = trainset.next(batch_size)
             # Run optimization op (backprop)
             sess.run(optimizer, feed_dict={x: batch_x, y: batch_y,
@@ -190,6 +194,7 @@ with tf.device('/gpu:0'):
                 print("Iter " + str(step*batch_size) + ", Minibatch Loss= " + \
                       "{:.6f}".format(loss) + ", Training Accuracy= " + \
                       "{:.5f}".format(acc))
+            iter_times.append(time.time() - start)
             step += 1
         print("Optimization Finished!")
 
@@ -201,3 +206,8 @@ with tf.device('/gpu:0'):
                                           seqlen: test_seqlen})
         print("Testing Accuracy:", test_accuracy)
         assert test_accuracy >= 0.44 and not math.isnan(test_accuracy)
+
+        print('iter_times', iter_times)
+        average_iter_time = np.average(iter_times[1:])
+        kernel_compile_time = iter_times[0] - average_iter_time
+        print('average_iter_times=', average_iter_time, 'kernel_compile_time', kernel_compile_time)

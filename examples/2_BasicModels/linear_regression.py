@@ -10,6 +10,9 @@ from __future__ import print_function
 import tensorflow as tf
 import numpy
 import math
+import numpy as np
+import time
+
 # import matplotlib.pyplot as plt
 rng = numpy.random
 
@@ -52,9 +55,14 @@ with tf.device('/gpu:0'):
         sess.run(init)
 
         # Fit all training data
+        epoch_times = []
         for epoch in range(training_epochs):
+            start = time.time()
             for (x, y) in zip(train_X, train_Y):
                 sess.run(optimizer, feed_dict={X: x, Y: y})
+
+            epoch_time = time.time() - start
+            epoch_times.append(epoch_time)
 
             # Display logs per epoch step
             if (epoch+1) % display_step == 0:
@@ -84,6 +92,10 @@ with tf.device('/gpu:0'):
         print("Absolute mean square loss difference:", abs(
             training_cost - testing_cost))
         assert testing_cost >= 0.07 and testing_cost <= 0.11 and not math.isnan(testing_cost)
+        print('epoch_times', epoch_times)
+        average_epoch_time = np.average(epoch_times[1:])
+        kernel_compile_time = epoch_times[0] - average_epoch_time
+        print('average_epoch_times=', average_epoch_time, 'kernel_compile_time', kernel_compile_time)
 
         # plt.plot(test_X, test_Y, 'bo', label='Testing data')
         # plt.plot(train_X, sess.run(W) * train_X + sess.run(b), label='Fitted line')

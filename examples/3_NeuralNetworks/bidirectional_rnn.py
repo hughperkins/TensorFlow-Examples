@@ -11,6 +11,8 @@ from __future__ import print_function
 
 import math
 import tensorflow as tf
+import numpy as np
+import time
 from tensorflow.python.ops import rnn, rnn_cell
 
 # Import MNIST data
@@ -101,8 +103,10 @@ with tf.device('/gpu:0'):
     with tf.Session() as sess:
         sess.run(init)
         step = 1
+        iter_times = []
         # Keep training until reach max iterations
         while step * batch_size < training_iters:
+            start = time.time()
             batch_x, batch_y = mnist.train.next_batch(batch_size)
             # Reshape data to get 28 seq of 28 elements
             batch_x = batch_x.reshape((batch_size, n_steps, n_input))
@@ -116,6 +120,7 @@ with tf.device('/gpu:0'):
                 print("Iter " + str(step*batch_size) + ", Minibatch Loss= " + \
                       "{:.6f}".format(loss) + ", Training Accuracy= " + \
                       "{:.5f}".format(acc))
+            iter_times.append(time.time() - start)
             step += 1
         print("Optimization Finished!")
 
@@ -126,3 +131,8 @@ with tf.device('/gpu:0'):
         test_accuracy = sess.run(accuracy, feed_dict={x: test_data, y: test_label})
         print("Testing Accuracy:", test_accuracy)
         assert test_accuracy >= 0.30 and not math.isnan(test_accuracy)
+
+        print('iter_times', iter_times)
+        average_iter_time = np.average(iter_times[1:])
+        kernel_compile_time = iter_times[0] - average_iter_time
+        print('average_iter_times=', average_iter_time, 'kernel_compile_time', kernel_compile_time)
