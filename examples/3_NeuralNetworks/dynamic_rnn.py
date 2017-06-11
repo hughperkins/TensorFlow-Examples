@@ -95,6 +95,8 @@ seq_max_len = 20 # Sequence max length
 n_hidden = 64 # hidden layer num of features
 n_classes = 2 # linear sequence or not
 
+random.seed(123)
+np.random.seed(123)
 trainset = ToySequenceData(n_samples=1000, max_seq_len=seq_max_len)
 testset = ToySequenceData(n_samples=500, max_seq_len=seq_max_len)
 
